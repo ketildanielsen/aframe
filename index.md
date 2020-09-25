@@ -46,12 +46,14 @@ Add this color attribute and reload abox.html. Now you should see it.
 
 ### Camera and the scene
 
-You do NOT see it?  That is probably because the box is not visible to the camera. This is the VR scene camera, not the webcamera.  Pull the camera back with ArrowDown or the S key, and the box should begin to appear.  
+You do NOT see it?  That is probably because the box is not visible to the camera. Note: This is the VR scene camera, not the webcamera that your machine may have.  
+
+Why? The camera is default positioned in (0, 1.6, 0) which means x=0, y=1.6 and z=0 (meters).  The box is default positioned in (0, 0, 0).  
+
+Pull the camera back with holding down the ArrowDown or the S key, and the box should begin to appear.  
 ![image](https://user-images.githubusercontent.com/9844906/94248454-cb1d0580-ff1e-11ea-84cf-e2385e8344b0.png)
 
-The camera is default positioned in (0, 1.6, 0) which means x=0, y=1.6 and z=0 (meters).  ArrowDown or S will increase z (move camera towards you).  ArrowUp or W will decrease z.  ArrowLeft or A will reduce x and ArrowRight or D will increase x.  Not sure how to change y.
-
-The box is default positioned in (0, 0, 0).  Try to draw a coordinate system with 3 axes.
+ArrowDown or S will increase z (move camera towards you).  ArrowUp or W will decrease z.  ArrowLeft or A will reduce x and ArrowRight or D will increase x.  Not sure how to change y.
 
 You can also hit Ctrl-I or "inspect" to see the scene from a different viewpoint.  This is the A-Frame developer/inspection window.  You can zoom, rotate etc with the mouse. The box has been selected in the image below, so you see it's wireframe:
 ![image](https://user-images.githubusercontent.com/9844906/94248835-50a0b580-ff1f-11ea-9be3-47feee03f6a3.png)
@@ -62,9 +64,9 @@ To see the camera, select it and the wireframe is shown.  In the image below, we
 ![image](https://user-images.githubusercontent.com/9844906/94249027-9493ba80-ff1f-11ea-9626-963cf2a00d81.png)
 The camera is at y=1.6, and obviously higher "up" than the box, which seems centered at (0,0,0) with a width and height of 1.
 
-The camera has a field of view, defined by the four yellow rays.
+The camera has a field of view, defined by the four yellow rays.  The problem above was that the red box at (0,0,0) was outside of the default camera view.
 
-The white ray is the "eye" of the camera, it points to the center of the field of view.
+The white ray is the "eye" of the camera, it points to the center of the field of view.  
 
 Try top view, left view and other view to verify the positioning.  This should explain the situation to you.
 
@@ -102,6 +104,20 @@ The written codes have to be identical, but the spacing is less important.  This
                                 </html>
 ```
 But is messy and hard to read.  I think.  The web browser does not care, though.  
+
+The program below has three errors. Try to find them:
+```html
+<html>
+   <head>
+      <scipt src='https://aframe.io/releases/1.0.4/aframe.min.js'></script>
+   </head>
+   <body>
+      <a-scene>
+        <a-box color="red"> <a-box>
+      </a-scene>
+   </bdy>
+</html>
+```
 
 ### Other 3D objects
 
