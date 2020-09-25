@@ -1,4 +1,25 @@
-## Welcome to GitHub Pages
+## Welcome to my learning to program using A-Frame site
+
+### Boilerplate
+
+A program is written in a program file.  We begin with a minimal file that contains no more than is absolutely strictly necessary to get started:  The "boilerplate" (and who gave it such a name?).  
+
+```
+<html>
+   <head>
+      <script src='https://aframe.io/releases/1.0.4/aframe.min.js'></script>
+   </head>
+   <body>
+      <a-scene>
+      </a-scene>
+   </body>
+</html>
+```
+
+We begin by printing messages to ourselves
+
+# Remaining is not about A-Frrame
+(it is the original content about how to use this github pages feature)
 
 You can use the [editor on GitHub](https://github.com/ketildanielsen/aframe/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
