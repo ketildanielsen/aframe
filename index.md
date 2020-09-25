@@ -22,20 +22,17 @@ A program is written in a program file.  We begin with a minimal file that conta
 ### Save and run
 Copy this into a text editor such as [Notepad++](https://notepad-plus-plus.org/) on Windows, save it (usually Ctrl-S) to boilerplate.html. There are [other editors](https://www.w3schools.com/html/html_editors.asp) Open this file in your web browser (usually Ctrl-O).  You will see a white scene, probably looks like nothing.  
 
-The source code has now been read into your web browser. You can check the source code with Ctrl-U (usually). 
-
-### Check source code
-The source code
+The source code has now been read into your web browser. You can check the source code with Ctrl-U (usually).  It should look exactly like the code in the editor.
 
 ### Box
 A square box is added to the scene with ``<a-box> </a-box>``.  
-
 ```html
       <a-scene>
          <a-box> 
          </a-box>
       </a-scene>
 ```
+
 ### Make a copy
 Assuming you have boilerplate.html open in the editor. Do a "Save As" (usually Ctrl-S) to new name abox.html.  the two box lines, save and open in the browser. You will see nothing, but there is a scene with white background and a white box, still looks like nothing.
 
@@ -56,16 +53,22 @@ The camera is default positioned in (0, 1.6, 0) which means x=0, y=1.6 and z=0 (
 
 The box is default positioned in (0, 0, 0).  Try to draw a coordinate system with 3 axes.
 
-You can also hit Ctrl-I and see the scene from a different viewpoint.  This is the A-Frame developer window.  You can zoom, rotate etc with the mouse. The box has been selected in the image below:
+You can also hit Ctrl-I or "inspect" to see the scene from a different viewpoint.  This is the A-Frame developer/inspection window.  You can zoom, rotate etc with the mouse. The box has been selected in the image below, so you see it's wireframe:
 ![image](https://user-images.githubusercontent.com/9844906/94248835-50a0b580-ff1f-11ea-9be3-47feee03f6a3.png)
+
+With the wireframe are three lines:  Green (up, y-axis), red (x-axis) and blue (z-axis).  In this window you can actually drag these arrows and see the entity move.  Very handy for debugging or just for understanding.
 
 To see the camera, select it and the wireframe is shown.  In the image below, we see the box and camera from above-left.  
 ![image](https://user-images.githubusercontent.com/9844906/94249027-9493ba80-ff1f-11ea-9626-963cf2a00d81.png)
 The camera is at y=1.6, and obviously higher "up" than the box, which seems centered at (0,0,0) with a width and height of 1.
 
+The camera has a field of view, defined by the four yellow rays.
+
+The white ray is the "eye" of the camera, it points to the center of the field of view.
+
 Try top view, left view and other view to verify the positioning.  This should explain the situation to you.
 
-Ctrl-I brings you back
+Ctrl-I or "back to scene" brings you back
 
 ### Debug: Check program syntax
 
@@ -89,19 +92,16 @@ Does your abox.html look like this?
 ```
 The written codes have to be identical, but the spacing is less important.  This is also syntactically correct:
 ```html
-                  <html>
-   <head       >       <script src='https://aframe.io/releases/1.0.4/aframe.min.js'></script>    </head>
-<body>                               <           a-scene>
-        <a-box      color
-                =  "red"> <   /a-box>
-               </a-scene   >
-<        
-             /body>
-           
-           <
-            /html>
+          <html>   <head>
+      <script src='https://aframe.io/releases/1.0.4/aframe.min.js'></script>
+   </head>   <body>      <a-scene>
+        <a-box 
+    color="red">
+        </a-box>
+      </a-scene>   </body>
+                                </html>
 ```
-But is messy and hard to read.  I think.  The web browser does not care, though.
+But is messy and hard to read.  I think.  The web browser does not care, though.  
 
 ### Other 3D objects
 
