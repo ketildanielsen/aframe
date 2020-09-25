@@ -50,12 +50,22 @@ Add this color attribute and reload abox.html. Now you should see it.
 ### Camera and the scene
 
 You do NOT see it?  That is probably because the box is not visible to the camera. This is the VR scene camera, not the webcamera.  Pull the camera back with ArrowDown or the S key, and the box should begin to appear.  
+![image](https://user-images.githubusercontent.com/9844906/94248454-cb1d0580-ff1e-11ea-84cf-e2385e8344b0.png)
 
 The camera is default positioned in (0, 1.6, 0) which means x=0, y=1.6 and z=0 (meters).  ArrowDown or S will increase z (move camera towards you).  ArrowUp or W will decrease z.  ArrowLeft or A will reduce x and ArrowRight or D will increase x.  Not sure how to change y.
 
 The box is default positioned in (0, 0, 0).  Try to draw a coordinate system with 3 axes.
 
-You can also hit Ctrl-I and see the scene from a different viewpoint.  This is the A-Frame developer window.  You can zoom, rotate etc with the mouse. Ctrl-I brings you back.  Try top view, left view and other view to verify the positioning.  This should explain the situation to you.
+You can also hit Ctrl-I and see the scene from a different viewpoint.  This is the A-Frame developer window.  You can zoom, rotate etc with the mouse. The box has been selected in the image below:
+![image](https://user-images.githubusercontent.com/9844906/94248835-50a0b580-ff1f-11ea-9be3-47feee03f6a3.png)
+
+To see the camera, select it and the wireframe is shown.  In the image below, we see the box and camera from above-left.  
+![image](https://user-images.githubusercontent.com/9844906/94249027-9493ba80-ff1f-11ea-9626-963cf2a00d81.png)
+The camera is at y=1.6, and obviously higher "up" than the box, which seems centered at (0,0,0) with a width and height of 1.
+
+Try top view, left view and other view to verify the positioning.  This should explain the situation to you.
+
+Ctrl-I brings you back
 
 ### Debug: Check program syntax
 
@@ -79,19 +89,56 @@ Does your abox.html look like this?
 ```
 The written codes have to be identical, but the spacing is less important.  This is also syntactically correct:
 ```html
-<html>
-   <head>       <script src='https://aframe.io/releases/1.0.4/aframe.min.js'></script>    </head>
-   <body>                               <a-scene>
-        <a-box color="red"> </a-box>
-               </a-scene>
-</body>
-</html>
+                  <html>
+   <head       >       <script src='https://aframe.io/releases/1.0.4/aframe.min.js'></script>    </head>
+<body>                               <           a-scene>
+        <a-box      color
+                =  "red"> <   /a-box>
+               </a-scene   >
+<        
+             /body>
+           
+           <
+            /html>
 ```
 But is messy and hard to read.  I think.  The web browser does not care, though.
 
+### Other 3D objects
+
+A box is one of many different entity types.  There is also ``a-sphere`` (a ball), ``a-plane`` (a 2D surface) and ``a-triangle``. 
+
+### Transformations
+
+An entity can be moved (position changes), also called translation. It can also be scaled (change size) and it can be rotated on 1 or more of the 3 axes.
+
+### Position (translation)
+By adding ``position="1 -2 0.2"`` the entity will be placed at x=1, y=-2 and z=0.2.
+Q: Make the redbox have same position as the default camera. Verify with Developer Window.
+
+### Scale
+By adding ``scale="0.5 0.5 1"`` the entity will be only 50 % as wide (x=0.5) and high (y=0.5), but same depth (z=1).
+Q: Try this, verify it works.
+
+### Rotation
+By adding ``rotation="0 90 -180"`` the entity will rotated 90 degrees around the y-axis and -180 degrees around the z-axis.   No rotation around the x-axis. 
+Q: Try this and verify.
+
+### Combine transformations
+Add as many attributes as are needed:
+```html
+   <a-box color="red" position="1 2 3" rotation="0 90 0">
+   </a-box>
+```
 
 
-== Printing text ==
+### Exercise
+
+When you run a program, you can go back and forth using Ctrl-I.  Just verify that this works for you.
+
+Add a blue box.  Run it and see if you can find the two boxes.  You should see only one, since they are in exact same position and same size.
+
+
+## Printing text 
 We begin by printing messages to ourselves
 
 # Remaining is not about A-Frrame
