@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"> 
+    </script>
+    <script>
+    var moveduration=7;
+    var nbrMoves=100;
+    setInterval (flytt, 1000*moveduration/nbrMoves);
+    var x=0, y=0, z=0;
+    var xrot=0, yrot=0, zrot=0;
+    function flytt() {
+      t = document.getElementById("trekant");    
+      x+=1/nbrMoves; y+=2/nbrMoves; z+=3/nbrMoves;    
+      xrot+=5;
+      t.setAttribute ("position", x+" "+y+" "+z);
+      t.setAttribute ("rotation", xrot+" "+yrot+" "+zrot);
+    }
+    </script>
+  </head>
+  <body>
+    <a-scene>
+  <a-entity id="trekant">
+      <a-triangle id="" color="red" position="0 0 0"> 
+      </a-triangle>
+      <a-triangle id="" color="green" position=".5 .5 0"> 
+      </a-triangle>
+  </a-entity>
+    </a-scene>
+  </body>
+</html>

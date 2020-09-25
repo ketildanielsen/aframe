@@ -1,0 +1,28 @@
+<!-- lab 7/9 deloppg 9: 
+   kamera går i bane rundt scenen i avstand 10 fra origo
+   spinner langs alle 3 akser 
+   blikket i kamera skal rettes mot origo
+ -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="lagbokser.js"> </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <!-- riggen vil rotere rundt origo -->
+                   <!-- tar rotasjon i alle tre akser -->
+       <a-entity id="rig" position="0 0 0"
+                animation="property: rotation; to: 360 360 360; loop: true; dur: 10000" >
+       >
+           <!-- kamera står fast i posisjon z=10 ut fra origo. 
+                "Blikket" (synsstrålen) blir alltid rettet direkte mot origo -->
+           <a-camera position="0 0 10"> </a-camera>
+
+       </a-entity>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

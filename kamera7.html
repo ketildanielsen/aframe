@@ -1,0 +1,17 @@
+<!-- lab 7/9 deloppg 7: kamera roterer rundt sin akse -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="lagbokser.js"> </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <a-camera position="0 0 10"
+                     animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" >
+           > </a-camera>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

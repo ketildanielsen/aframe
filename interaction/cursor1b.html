@@ -1,0 +1,55 @@
+<!-- lab 14/9 deloppg cursor 1b (uten AFRAME komponent): 
+   bokser spretter opp rundt en
+   cursor viser hvor "blikket" er
+   boks blir tatt når man ser på den
+   HUD som viser antall bokser laget og tatt
+   må vri hodet mye for å ta boksene
+ -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script >
+    var teller=0;
+// lagbokser.js, slik den var i lab 7/9-2020
+	var bokslager = setInterval (lagboks, 2000);
+        var antBokser = 0; // må huske hvor mange vi har laget
+	function uniform (a,b) { return a + (b-a)*Math.random(0,1); }
+        function tpos() { return uniform(-5,5); }
+	function lagboks() {
+           var scene = document.querySelector ('a-scene'); 
+           var ny = document.createElement ('a-box') 
+           ny.object3D.position.x=tpos();  
+           ny.object3D.position.y=tpos();
+           ny.object3D.position.z=tpos();  
+	   ny.addEventListener('mouseenter', function() {
+		    teller += 1;
+		    oppdaterHUD();
+		    ny.parentNode.removeChild(ny);   // ikke bruk this.el!!
+		});
+           scene.appendChild (ny); 
+           antBokser++; // øk antall bokser
+           if (antBokser >= 100) { // sjekk hvor mange vi har laget
+	     clearInterval (bokslager);
+           }
+           oppdaterHUD();
+        }
+	function oppdaterHUD () {
+	   document.getElementById("hud").setAttribute
+             ("value", "N: " + antBokser + "\n" + "X: " + teller);
+	}
+
+    </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <a-entity id="rig" position="0 0 0"       >
+        
+           <a-camera position="0 0 20"> <a-text value="0" color="green" id="hud" position="0 0 -1"> </a-text><a-cursor> </a-cursor> </a-camera>
+
+       </a-entity>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red" > </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

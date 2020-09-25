@@ -1,0 +1,20 @@
+<!-- lab 7/9 deloppg 6: kamera går opp og ned mellom -5 og +5 langs y-aksen -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="lagbokser.js"> </script>
+  </head>
+  
+  <body>
+    <a-scene>
+                    <!-- starter i y=-5 -->
+       <a-camera position="0 -5 10"
+                     animation="property: position; to: 0 5 10; 
+                                loop: true; dur: 8500; dir: alternate" >
+                     <!-- alternate gir opp og ned -->
+           > </a-camera>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

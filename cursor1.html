@@ -1,0 +1,63 @@
+<!-- cursor1.html -- fjerne bokser med et raskt blikk -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+      // kan evt skilles ut i egen JS-fil, som i lab 14/9
+      var bokslager = setInterval(lagboks, 2000);
+      var antBokser = 0; // må huske hvor mange vi har laget
+      var antSlettet = 0;// og hvor mange vi har slettet
+      function uniform(a, b) {
+        return a + (b - a) * Math.random(0, 1);
+      }
+      function tpos() {
+        return uniform(-5, 5);
+      }
+      function lagboks() {
+        var scene = document.querySelector("a-scene");
+        ny = document.createElement("a-box");
+        ny.object3D.position.x = tpos();
+        ny.object3D.position.y = tpos();
+        ny.object3D.position.z = tpos();
+        ny.setAttribute("die-on-mouseenter", "true");
+        scene.appendChild(ny);
+        antBokser++; // øk antall bokser
+        if (antBokser >= 10000) {
+          clearInterval(bokslager);
+        }
+        oppdaterHUD();
+      }
+      function oppdaterHUD() {
+        document
+          .getElementById("hud")
+          .setAttribute("value", "N: " + antBokser + "\n" + "X: " + antSlettet);
+      }
+      // komponent som sletter seg selv når den blir truffet av en mus
+      AFRAME.registerComponent("die-on-mouseenter", {
+        init: function() {
+          let el = this.el;
+          el.addEventListener("mouseenter", function() {
+            antSlettet += 1;
+            oppdaterHUD();
+            el.parentNode.removeChild(el); // slett entiteten
+          });
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-entity
+        animation="property: rotation; to: 360 360 360; loop: true; dur: 10000">
+        <a-camera position="0 0 20">
+          <a-text value="0" color="green" id="hud" position="0 0 -1"> </a-text>
+          <a-cursor> </a-cursor>
+        </a-camera>
+      </a-entity>
+
+      <a-sky color="grey"> </a-sky>       <!-- for å se de hvite boksene -->
+      <a-box color="red"> </a-box>      <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

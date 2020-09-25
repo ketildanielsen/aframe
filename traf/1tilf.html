@@ -1,0 +1,24 @@
+<html>
+  <head> <script src="https://aframe.io/releases/1.0.4/aframe.min.js"> </script> 
+  </head>
+  <script>
+  //  setInterval ( lagny, 500 );
+
+    function uniform(a,b) { return a + Math.random()*(b-a); }
+    function lagny () {
+      scene = document.querySelector ('a-scene'); // søk opp stedet
+      ny = document.createElement ('a-box')       // lag nytt
+      ny.object3D.position.x=uniform(-1,1)      // juster den nye
+      ny.object3D.position.y=1.6;
+      ny.object3D.position.z=uniform(-1,1)
+      scene.appendChild (ny);                     
+    }
+  </script>
+  <body>
+    <a-scene>
+<a-text value="hei" material="side:double;">  </a-text>
+    </a-scene>
+  </body>
+<script>
+</script>
+</html>

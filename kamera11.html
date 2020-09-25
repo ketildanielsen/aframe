@@ -1,0 +1,24 @@
+<!-- lab 7/9 deloppg 11: kamera står midt foran, 10 meter ut 
+      + kamera 2 som står rett over.
+      HUD viser "Kamera 1" og "Kamera 2"
+-->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="lagbokser.js"> </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <a-camera position="0 0 10" active="true"> 
+          <a-text value="Kamera 1" position="0 0 -2" color="red"> </a-text>
+       </a-camera>
+          <!-- fikk ikke satt rotasjon til x=-90, gjorde det i Visual Inspector -->
+       <a-camera position="0 10 0" rotation="-90 0 0" active="false"> 
+          <a-text value="Kamera 2" position="0 0 -2" color="yellow"> </a-text>
+       </a-camera>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+  <head> <script src="https://aframe.io/releases/1.0.4/aframe.min.js"> </script> 
+  </head>
+  <script>
+    setInterval ( lagny, 1500 );
+
+    function lagny () {
+      scene = document.querySelector ('a-scene'); // søk opp stedet
+      ny = document.createElement ('a-box')       // lag nytt
+      ny.object3D.position.x=uniform(-10,10)      // juster den nye
+      ny.object3D.position.y=0;
+      ny.object3D.position.z=uniform(-10,10)
+      scene.appendChild (ny);                     
+    }
+  </script>
+  <body>
+hei
+    <a-scene>
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+   <script>
+AFRAME.registerComponent('raycaster-listen', {
+  init: function () {
+    // Use events to figure out what raycaster is listening so we don't have to
+    // hardcode the raycaster.
+    // legg til lytter på om stråle og entitet intersekta
+    this.el.addEventListener('raycaster-intersected', evt => {
+      this.raycaster = evt.detail.el;
+      // 3 neste linjer fra tick.
+      let intersection = this.raycaster.components.raycaster.getIntersection(this.el);
+      if (!intersection) { alert("no intersection"); return; }
+      console.log(intersection.point);
+    });
+    // legg til lytter på cleared
+    this.el.addEventListener('raycaster-intersected-cleared', evt => {
+      this.raycaster = null;
+    });
+  },
+
+/*
+  tick: function () {
+    if (!this.raycaster) { return; }  // Not intersecting.
+
+    let intersection = this.raycaster.components.raycaster.getIntersection(this.el);
+    if (!intersection) { return; }
+    console.log(intersection.point);
+  }
+*/
+});
+
+   </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <a-entity  >
+          <a-camera position="0 1 2"> 
+              <a-cursor color="blue"> </a-cursor>
+          </a-camera>
+       </a-entity>
+      <!-- den røde boks lytter på strålekasteren -->
+      <a-box color="red" raycaster-listen></a-entity>
+      <a-sky color="grey"> </a-sky>
+    </a-scene>
+  </body>
+</html>

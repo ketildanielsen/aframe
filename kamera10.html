@@ -1,0 +1,41 @@
+<!-- lab 7/9 deloppg 10: 
+   kamera står i ro (avstand 10 langs z) og boksene går i bane rundt origo
+ -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+// lagbokser.js, slik den var i lab 7/9-2020
+	var bokslager = setInterval (lagboks, 2000);
+        var antBokser = 0; // må huske hvor mange vi har laget
+	function uniform (a,b) { return a + (b-a)*Math.random(0,1); }
+        function tpos() { return uniform(-5,5); }
+	function lagboks() {
+           // trikset her er å legge boksene inn under elementet "bokseelement"
+           var scene = document.getElementById ('bokseelement'); 
+           ny = document.createElement ('a-box') 
+           ny.object3D.position.x=tpos();  
+           ny.object3D.position.y=tpos();  
+           ny.object3D.position.z=tpos();  
+           scene.appendChild (ny); 
+           antBokser++; // øk antall bokser
+           if (antBokser >= 7) { // sjekk hvor mange vi har laget
+	     clearInterval (bokslager);
+           }
+        }
+    </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <!-- boksene (barn av bokseelement) vil rotere rundt origo, 
+            kamera står 10 meter ut i fast posisjon -->
+       <a-entity id="bokseelement" position="0 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" >
+       </a-entity>
+       <a-camera position="0 0 10"> </a-camera>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

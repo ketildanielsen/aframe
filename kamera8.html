@@ -1,0 +1,22 @@
+<!-- lab 7/9 deloppg 8: 
+   kamera går i bane rundt scenen i avstand 10 fra origo
+ -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="lagbokser.js"> </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <!-- riggen vil rotere rundt origo, kamera står 10 meter ut 
+            og vil følge med, og dermed gå i bane rundt origo -->
+       <a-entity id="rig" position="0 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" >
+           <a-camera position="0 0 10"> </a-camera>
+       </a-entity>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

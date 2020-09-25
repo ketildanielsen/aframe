@@ -1,0 +1,18 @@
+<!-- lab 7/9 deloppg 13: 
+   lyssjekk
+ -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="lagbokser.js"> </script>
+  </head>
+  
+  <body>
+    <a-scene>
+          <!-- adding a light removes the two standard lights (point+ambient)-->
+       <a-light color="red" position="-1 1 0"></a-light>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="yellow"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

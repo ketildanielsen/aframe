@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script >
+    var teller=0;
+// lagbokser.js, slik den var i lab 7/9-2020
+	var bokslager = setInterval (lagboks, 200);
+        var antBokser = 0; // må huske hvor mange vi har laget
+	function uniform (a,b) { return a + (b-a)*Math.random(0,1); }
+        function tpos() { return uniform(-5,5); }
+	function lagboks() {
+           var ramme = document.getElementById ('bokseramme'); 
+           ny = document.createElement ('a-box') 
+           ny.object3D.position.x=tpos();  
+           ny.object3D.position.y=tpos();
+           ny.object3D.position.z=tpos();  
+     	   ny.setAttribute("die-on-mouseenter", "true");
+           ramme.appendChild (ny); 
+           antBokser++; // øk antall bokser
+           if (antBokser >= 100) { // sjekk hvor mange vi har laget
+	     clearInterval (bokslager);
+           }
+           oppdaterHUD();
+        }
+    </script>
+    <script>
+	function oppdaterHUD () {
+	   document.getElementById("hud").setAttribute
+             ("value", "N: " + antBokser + "\n" + "X: " + teller);
+	}
+  AFRAME.registerComponent('die-on-mouseenter', {
+    init: function () {
+		let el=this.el;
+		el.addEventListener('mouseenter', function() {
+		    teller += 1;
+		    oppdaterHUD();
+		    el.parentNode.removeChild(el);   // ikke bruk this.el!!
+		});
+	}
+  });
+</script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <a-entity id="bokseramme" position="0 0 0" animation="property:rotation;
+           to:360 360 360; dur:10000; loop:true;" >
+       </a-entity>
+       <a-entity id="rig" position="0 0 0" >
+        
+           <a-camera position="0 0 00"> <a-text value="0" color="green" id="hud" position="0 0 -1"> </a-text><a-cursor> </a-cursor> </a-camera>
+
+       </a-entity>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red" > </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

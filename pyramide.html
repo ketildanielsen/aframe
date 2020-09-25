@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"> 
+    </script>
+    <script>
+      setInterval (flytt, 200); // starte flytting
+      var x=0; y=0; z=0;  // rotasjon langs de 3 aksene
+      function flytt() {
+        t = document.getElementById("pyramide"); // angi navn som skal roteres
+        x+=5;  // y+=5; z+=5;
+        t.setAttribute ("rotation", x+" "+y+" "+z);
+      }
+    </script>
+  </head>
+  <body>
+    <a-scene>
+        <a-entity id="pyramide"
+           <!-- animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" -->        
+        > 
+           <a-triangle id="base"  color="red"    vertex-a="0 0 0" vertex-b="2 0 0" vertex-c="1 0 2" material="side:double"> </a-triangle>
+           <a-triangle id="side1" color="green"  vertex-a="0 0 0" vertex-b="2 0 0" vertex-c="1 2 1" material="side:double"> </a-triangle>
+           <a-triangle id="side2" color="yellow" vertex-a="0 0 0" vertex-b="1 0 2" vertex-c="1 2 1" material="side:double"> </a-triangle>
+           <a-triangle id="side3" color="blue  " vertex-a="2 0 0" vertex-b="1 0 2" vertex-c="1 2 1" material="side:double"> </a-triangle>
+        </a-entity>
+    </a-scene>
+  </body>
+</html>

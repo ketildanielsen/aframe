@@ -1,0 +1,30 @@
+<!-- lab 7/9 deloppg 12: kamera står midt foran, 10 meter ut 
+      + kamera 2 som står rett over.
+      HUD viser "Kamera 1" og "Kamera 2"
+      Veksle mellom de to hvert 3. sekund
+12b:  Bruke animation= for å bytte (i stedet for JS).
+-->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="lagbokser.js"> </script>
+  </head>
+  
+  <body>
+    <a-scene>
+       <a-camera position="0 0 10" id="kamera1" active="true"
+                 animation="property:active; from:true, to:false; dur:3000; dir:alternate"> 
+          <a-text value="Kamera 1" position="0 0 -2" color="red"> </a-text>
+       </a-camera>
+          <!-- fikk ikke satt rotasjon til x=-90, gjorde det i Visual Inspector -->
+       <a-camera position="0 10 0" rotation="-90 0 0" id="kamera2"> 
+          <a-text value="Kamera 2" position="0 0 -2" color="yellow" active="false"> </a-text>
+<!--
+                 animation="property:active; from:to, to:true; dur:3000; dir:alternate"> 
+-->
+       </a-camera>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

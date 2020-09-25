@@ -1,0 +1,36 @@
+<html>
+
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
+<script>
+  function reager () { 
+          alert("hei"); 
+          this.parentNode.removeChild(this);
+  }
+
+  AFRAME.registerComponent('hils', {
+      init: function () {
+          this.el.addEventListener('mouseenter', reager);
+      }
+   });
+</script>
+
+<body>
+
+<a-scene>
+  <a-box hils color="red">
+  </a-box>
+  <a-box hils color="green" position="-1 -1 -1">
+  </a-box>
+  <a-box hils position="1 1 1" color="blue">
+  </a-box>
+  <a-camera>
+     <a-cursor>
+     </a-cursor>
+  </a-camera>
+<a-scene>
+
+</body>
+
+
+</html>

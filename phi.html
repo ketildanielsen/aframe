@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+      n = 15;
+      bredde = 1;
+      avstand = 0.5;
+      aktiv = -1;
+      aktivBall = null;
+      antSkift=0;
+      antTreff=0;
+      setTimeout(nyttBrett, 1500); // vent 1/2 sekund
+      skifteIntervall = 500;
+      function nyttBrett() {
+        // lag brett med n baller av gitt bredde, plassert med gitt avstand
+
+        var brett = document.getElementById("brett");
+        for (var i = 0; i < n; i++) {
+          var ny = document.createElement("a-sphere");
+          ny.id = "Ball" + i;
+          ny.object3D.position.x =
+            Math.cos((2 * Math.PI * i) / n) * (bredde + avstand) * 5;
+          ny.object3D.position.y =
+            Math.sin((2 * Math.PI * i) / n) * (bredde + avstand) * 5;
+          ny.object3D.position.z = -10;
+          ny.setAttribute("color", "blue");
+          ny.setAttribute("class", "collidable");
+          ny.addEventListener("mouseenter",function(){
+            if (aktivBall == this) { antTreff++; }
+          });
+          brett.appendChild(ny);
+        }
+        document
+          .getElementById("saktere")
+          .addEventListener("mouseenter", function() {
+            // øk frekvensen (reduser intervallet)
+            clearInterval(skifter);
+            skifteIntervall = Math.min(3000, skifteIntervall + 50);
+            skifter = setInterval(skift, skifteIntervall);
+         /*   document
+              .getElementById("hud")
+              .setAttribute("value", skifteIntervall); */
+          });
+        document
+          .getElementById("raskere")
+          .addEventListener("mouseenter", function() {
+            // øk frekvensen (reduser intervallet)
+            clearInterval(skifter);
+            skifteIntervall = Math.max(10, skifteIntervall - 50);
+            skifter = setInterval(skift, skifteIntervall);
+        /*    document
+              .getElementById("hud")
+              .setAttribute("value", skifteIntervall); */
+          });
+        skifter = setInterval(skift, skifteIntervall);
+      }
+      function skift() {
+        if (aktivBall != null) {
+          aktivBall.setAttribute("color", "blue");
+        }
+        aktiv = (aktiv + 1) % n;
+        aktivBall = document.getElementById("Ball" + aktiv);
+        aktivBall.setAttribute("color", "white");
+        antSkift++;
+                    document
+              .getElementById("hud")
+              .setAttribute("value", antTreff + "/" + antSkift); 
+      }
+    </script>
+  </head>
+  <body>
+    <a-scene id="brett">
+      <a-entity>
+        <a-entity
+          laser-controls="hand: left"
+          raycaster="objects: .collidable"
+        ></a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+        <a-camera position="0 1.6 10">
+          <a-text
+            class="collidable"
+            position="0 0 -1"
+            value="+"
+            id="raskere"
+            color="green"
+          >
+          </a-text>
+          <a-text
+            class="collidable"
+            position="0 0.3 -1"
+            value="-"
+            id="saktere"
+            color="green"
+          >
+          </a-text>
+
+          <a-cursor color="red"> <a-text id="hud" value=""> </a-text></a-cursor>
+        </a-camera>
+      </a-entity>
+      <a-entity position="0 1.6 5"> </a-entity>
+    </a-scene>
+  </body>
+</html>
+

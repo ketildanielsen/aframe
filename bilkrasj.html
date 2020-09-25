@@ -1,0 +1,43 @@
+<html>
+  <!-- trying physics https://github.com/donmccurdy-up-for-adoption/aframe-physics-system -->
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <script>
+    function uniform (a,b) { return b+Math.random(0,1)*(b-a); }
+//    var bokselager = setInterval (lagboks, 2000);
+    function lagboks() {
+      var ny=document.createElement ('a-box');
+      ny.object3D.position.y=2;
+      ny.object3D.position.z=-6;
+      // https://aframe.io/docs/1.0.0/introduction/javascript-events-dom-apis.html
+      ny.setAttribute('dynamic-body', { shape: 'box', mass: 1.5, linearDamping: 0.005 });
+      document.getElementById ('fallescene').appendChild(ny);
+//      clearInterval (bokselager);
+    }
+    var bokseflytter = setInterval (flyttboks, 100);
+    function flyttboks() {
+      var el = document.getElementById ('redbox');
+      // will not move unless I remove the attribute
+      // https://stackoverflow.com/questions/44586862/a-frame-physics-dynamic-body-not-functioning-properly
+      el.removeAttribute("dynamic-body");
+      el.object3D.position.x += 0.1;
+        // higher mass may push the other collide
+      el.setAttribute('dynamic-body', { shape: 'box', mass: 1.5, linearDamping: 0.005 });
+    }
+  </script>
+  <body>
+    <a-scene id="fallescene" physics>
+      <a-camera position="0 1.6 4"> </a-camera>
+      <a-plane position="0 0 0" rotation="-90 0 0" width="10" color="yellow" static-body></a-plane>
+      <a-box position="-4 .5 0" color="red" id="redbox"
+             dynamic-body
+      ></a-box>
+             <!-- animation="property: position; to: 0 .5 0; loop: true; dur: 4000" -->
+        <!-- https://aframe.io/docs/1.0.0/components/animation.html -->
+      <a-box position="-1 .5 0" color="blue" dynamic-body ></a-box>
+      <a-sky color="grey"> </a-sky>
+    </a-scene>
+  </body>
+</html>

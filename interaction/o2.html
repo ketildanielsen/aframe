@@ -1,0 +1,93 @@
+<!-- o2.html oblig 1 med A-Frame comp. -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+      // kan evt skilles ut i egen JS-fil, som i lab 14/9
+      var bokslager = setInterval(lagboks, 2000);
+      var antBokser = 0; // må huske hvor mange vi har laget
+      var antSlettet = 0;// og hvor mange vi har slettet
+      var sumVentetid = 0; // sum ventetid for alle som er slettet
+      function uniform(a, b) {
+        return a + (b - a) * Math.random(0, 1);
+      }
+      function tpos() {
+        return uniform(-5, 5);
+      }
+      function nu() {
+        return new Date().getTime();
+      }
+      function ventetid(x) {
+        return nu()-x.getAttribute("ankomsttid");
+      }
+      function lagboks() {
+        var scene = document.querySelector("a-scene");
+        ny = document.createElement("a-box");
+        ny.object3D.position.x = tpos();     // plasser tilfeldig i (x,y,z)
+        ny.object3D.position.y = tpos();
+        ny.object3D.position.z = tpos();
+        ny.setAttribute("class", "bokseklasse");    // for å kunne "treffe" hver enkelt
+        ny.setAttribute("innom", "true");    // for å kunne "treffe" hver enkelt
+        ny.setAttribute("ankomsttid", nu()); // for å regne ventetid
+        scene.appendChild(ny);
+        antBokser++; // øk antall bokser
+        if (antBokser >= 10000) {
+          clearInterval(bokslager);
+        }
+        oppdaterHUD();
+      }
+      function oppdaterHUD() {
+        var snitt = antSlettet==0 ? "?":
+                    Math.round(sumVentetid/(10*antSlettet))/100;
+        document
+          .getElementById("hud")
+          .setAttribute("value", "N: " + antBokser + "\n" + "X: " + antSlettet + 
+                        "\nW: " + snitt);
+      }
+      var fargelegger = setInterval (fargelegg, 500); 
+      function fargelegg () {
+        var bokser = document.getElementsByClassName ("bokseklasse");
+        var i;
+        for (i=0; i<bokser.length; i++) {
+          switch (Math.round(ventetid(bokser[i]) / 5000)) {
+             case 0: color="white"; break;
+             case 1: color="green"; break;
+             case 2: color="yellow"; break;
+             case 3: color="blue"; break;
+             default:color="red";
+          }
+          bokser[i].setAttribute("color",color);
+        }
+        console.log(i);
+      }
+      // komponent som sletter seg selv når den blir truffet av en mus
+      AFRAME.registerComponent("innom", {
+        init: function() {
+          let el = this.el;
+          el.addEventListener("mouseenter", function() {
+            antSlettet += 1;
+            sumVentetid += ( nu() - el.getAttribute("ankomsttid") );
+            oppdaterHUD();
+            el.parentNode.removeChild(el); // slett entiteten
+          });
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-entity
+        animation="property: rotation; to: 360 360 360; loop: true; dur: 10000">
+        <a-camera position="0 0 20">
+          <a-text value="0" color="green" id="hud" position="0 0 -1"> </a-text>
+          <a-cursor> </a-cursor>
+        </a-camera>
+      </a-entity>
+
+      <a-sky color="grey"> </a-sky>       <!-- for å se de hvite boksene -->
+      <a-box color="red"> </a-box>      <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>
+

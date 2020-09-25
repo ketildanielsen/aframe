@@ -1,0 +1,32 @@
+<!-- lab 7/9 deloppg 1: 
+  etter 500 ms skal det
+  lages 3 bokser på 1x1x1 meter på rekke og rad langs 
+  z-aksen (x=0, y=0) med 1 meters avstand. -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+	var bokslager = setInterval (lagboks, 500);
+	function uniform (a,b) { return a + (b-a)*Math.random(0,1); }
+	function lagboks() {
+	
+           var scene = document.querySelector ('a-scene'); 
+           for (var i=0; i<3; i++) {
+             ny = document.createElement ('a-box') 
+             // sier ikke hvor på z-aksen en skal starte
+             // hver boks er 1 m bred, så må mult med 2
+             // for å få 1 m avstand mellom hver boks
+             ny.object3D.position.z=i*2;  
+             scene.appendChild (ny); 
+   	   }
+	 clearInterval (bokslager);
+       }
+     </script>
+  </head>
+  
+  <!-- tom scene, innhold lages i Javascript -->
+  <body>
+    <a-scene>
+    </a-scene>
+  </body>
+</html>

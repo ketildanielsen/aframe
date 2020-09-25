@@ -1,0 +1,80 @@
+<!-- aroblig1.html -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <script >
+        // oppsett for et eksperiment (input)
+        var Nboks = 100;   // så mange som skal lages
+        var Rboksrate = 100000; // antall bokser som lages per sekund
+
+        // internt
+        var antBokser = 0; // må huske hvor mange vi har laget
+        var antTatt=0;     // og hvor mange som er tatt
+        function nu() { return new Date().getTime(); } // millisekund
+        var starttid = nu();
+        function tidbrukt() { return nu() - starttid; }
+	function uniform (a,b) { return a + (b-a)*Math.random(0,1); }
+        function tpos() { return uniform(-5,5); }
+	var bokslager = setInterval (lagboks, 1000/Rboksrate);
+	function lagboks() {
+           ny = document.createElement ('a-box') 
+           ny.object3D.position.x=tpos();  
+           ny.object3D.position.y=tpos();
+           ny.object3D.position.z=tpos();  
+     	   ny.setAttribute("die-on-mouseenter", "true");
+           var ramme = document.getElementById ('bokseramme'); 
+           ramme.appendChild (ny); 
+           antBokser++; 
+           if (antBokser >= Nboks) { // sjekk hvor mange vi har laget
+	     clearInterval (bokslager);
+           }
+        }
+        var hudTegner = setInterval (oppdaterHUD, 500);
+	function oppdaterHUD () {
+	   document.getElementById("hud").setAttribute 
+             ( "value", "Igjen: " + (Nboks-antTatt) + 
+               "\nTid: " + Math.round ( tidbrukt() / 1000 ));
+        //     ("value", "M: " + antBokser + "\n" + "X: " + antTatt);
+	   if (antTatt >= Nboks) {
+              clearInterval (hudTegner);
+              var tid = tidbrukt();
+	      document.getElementById("hud").setAttribute ("value",
+                 "Ferdig!\nY="+Math.round(Nboks/(tid/1000)*100)/100);
+           }
+	}
+  AFRAME.registerComponent('die-on-mouseenter', {
+    init: function () {
+		let el=this.el;
+		el.addEventListener('mouseenter', function() {
+		    antTatt += 1;
+		    el.parentNode.removeChild(el);   // ikke bruk this.el!!
+		});
+	}
+  });
+</script>
+  </head>
+  
+  <body style='margin : 0px; overflow: hidden;'>
+    <a-scene embedded arjs>
+       <a-entity id="bokseramme" position="0 0 0" 
+                 animation="property:rotation; to:360 360 360; dur:10000; loop:true;" >
+       </a-entity>
+
+
+
+
+       <a-entity>
+<!--
+          <a-camera position="0 0 0"> 
+            <a-text value="0" color="green" id="hud" position="0 0 -1"> </a-text>
+            <a-cursor> </a-cursor> 
+         </a-camera>
+-->
+          <a-marker-camera preset='hiro'></a-marker-camera>
+       </a-entity>
+       <a-sky color="grey"> </a-sky>   <!-- for å se de hvite boksene -->
+       <a-box color="red" scale=".5 .5 .5"> </a-box>    <!-- referanseboks i midten -->
+    </a-scene>
+  </body>
+</html>

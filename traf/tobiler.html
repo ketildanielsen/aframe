@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"> </script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script>
+    var flytter = setInterval (flytt, 500);
+    function stopp() {
+      clearInterval(flytter);
+    }
+    function flytt() {
+      t = document.getElementById("bil1");    
+      t.object3D.position.z += 0.3;
+      t = document.getElementById("bil2");    
+      t.object3D.position.z += 0.2;
+    }
+    </script>
+  </head>
+  <body>
+    <a-scene physics="debug: true">
+
+      <a-box id="bil1" dynamic-body color="blue" position="0 1 -10">
+      </a-box>
+
+      <a-box id="bil2" dynamic-body color="yellow" position="0 1 -5">
+      </a-box>
+
+      <a-camera>
+         <a-entity id="hud" text="value: Hello World;"></a-entity>
+      </a-camera>
+
+    </a-scene>
+  </body>
+</html>

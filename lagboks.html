@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+        // forsinke med 1/2 sekund inntil a-scene er lastet
+	var bokslager = setInterval (lagboks, 500);
+	function lagboks() {
+           var scene = document.querySelector ('a-scene'); 
+           ny = document.createElement ('a-box') 
+           ny.object3D.position.y=1.6;
+           scene.appendChild (ny); 
+	   clearInterval (bokslager);
+	}
+    </script>
+  </head>
+  <body>
+    <a-scene>
+    </a-scene>
+  </body>
+  <script>
+    // i stedet for forsinkelses-teknikken (over) kunne en her (etter BODY) 
+    // enten a) kjørt lagboks uten feil, fordi a-scene ikke er null
+    // eller b) lagt inn en onloaded event-test (kommer senere)
+  </script>
+</html>

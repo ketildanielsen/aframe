@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"> 
+    </script>
+    <script>
+    var flytter = setInterval (flytt, 2000);
+    var x=0, y=0, z=-10;
+    function stopp() {
+      clearInterval(flytter);
+    }
+    function flytt() {
+      t = document.getElementById("bil");    
+      z+=0.2;
+      t.setAttribute ("position", { x:0, y:1, z:z} );
+      t = document.getElementById("hud");    
+      t.setAttribute ("text", "value: "+z+";" );
+    }
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box onclick="alert('hei');" id="bil" color="blue" position="0 1 -10"> 
+      </a-box>
+   <a-camera>
+      <a-entity id="hud" text="value: Hello World;"></a-entity>
+   </a-camera>
+      <a-triangle id="stopp" color="red" position="0 0 0" onclick="alert('hei')"></a-triangle>
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,264 @@
+Mål
+   bli kjent med nettstedet for aframe
+   gjenskape enkle modeller
+   se sammenheng med teori (LaValle, kap 1)
+
+Forutsetter i høst at en kan
+   enkel kildekode i HTML
+   skrive HTML i teksteditor
+   vet at nettleser tolker og viser kilde (HTML)
+   Ctrl-U gir kilde 
+
+Stoff kommer fra
+   venstremeny
+   A-frame school
+
+---------------------------------------------------
+BYGG ENKEL SCENE
+https://aframe.io/docs/1.0.0/guides/building-a-basic-scene.html
+
+Kontroller
+   Flat skjerm
+      WASD taster.  Piltaster.  Klikk-dra med mus.
+   Mobil.
+      "pan around".
+   Headset.
+Har en lenke til Mozilla: https://mixedreality.mozilla.org/#start
+
+
+---------------------------------------------------
+VENSTREMENY
+A-frame intro: https://aframe.io/docs/1.0.0/introduction/
+   WebVR, VR for nettlesere
+   Støtter variert VR-utstyr (Vive, Rift, Microsoft MR, Daydrem, GearVR, Cardboard, Oculus etc)
+   Kan også brukes for AR
+   Utviklet av Mozilla, senere Supermedium 
+   Uavhengig åpen kildekode
+   Bygget på HTML (deklarativt språk) og Javascript (funksjonelt språk)
+   aframe.js avhenger av three.js
+   Forandrer ikke nettleserens DOM (lager egen struktur)
+   Komponenter som geometri, materialer, lys, animasjon, modeller, strålekastere, skygger, 
+      stedslyd, tekst, inputkontrollere
+   Javascript, lenkes inn i med head/script
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+   
+Installation: https://aframe.io/docs/1.0.0/introduction/installation.html
+   Kodeeditor i nettleser
+   Glitch remix
+   Alternativt, CodePen: https://codepen.io/mozvr/pen/BjygdO
+   Lokal utvikling
+   
+VR-utstyr: https://aframe.io/docs/1.0.0/introduction/vr-headsets-and-webvr-browsers.html
+   Hva er VR?
+   Ulikheter mellom headset
+      Rotational (3DOF) eller positional (6DOF)
+      Med eller uten kontrollere
+      Selvstendig eller må kobles til PC
+   Eksempler 
+      VR for headset (desktop, mobil, selvstendig)
+      "Flat" på desktop, mobil ("magic window" for 360-vising uten headset)
+      AR i Microsoft Hololens
+   Hva er WebVR (igjen?)
+      A-Frame bruker WebVR API for tilgang til headset
+   WebGL er noe annet 
+      https://en.wikipedia.org/wiki/WebGL
+      Kommer fra Mozilla (Vladimir Vukicevic, 2006–), Khronos fra 2009
+      Bruker HTML5 canvas
+      Javascript for CPU 
+      GLSL ES shaderkode for GPU.
+
+HTML & primitives: 
+   https://aframe.io/docs/1.0.0/introduction/html-and-primitives.html
+   Uses "polyfill" for Custom Elements??
+      polyfill:  https://developer.mozilla.org/en-US/docs/Glossary/Polyfill
+         JS to provide modern things in older browser (as mimicking Canvas)
+         fill in holes, i.e. missing things in an API
+   primitive (som a-box) bruker ("wraps around") a-entity
+      <a-box color="red" width="3"></a-box>
+      vs
+      <a-entity geometry="primitive: box; width: 3" material="color: red">
+      </a-entity>
+      Developers can make their own primitives
+         AFRAME.registerPrimitive(name, definition)
+      (samme som "prefabs" i Unity = prefabrikerte, ferdig/forhåndslagede)
+   
+Three.js: https://aframe.io/docs/1.0.0/introduction/developing-with-threejs.html
+   Aframe bruker (ligger over) three.js sitt API
+   a-scene er en Three.Scene 
+   a-entity A er et eller annet Three.xyz O 
+      O.el peker til tilsv a-entity (opp fra Three O til Aframe A)
+      A.object3D peker "motsatt" vei (ned fra Aframe A til O)
+         document.querySelector('a-scene').object3D;
+         document.querySelector('a-entity').sceneEl.object3D;
+      a-box tilsvarer et Three.Mesh
+      a-light ... Three.Light
+   Tror Three.js bruker radianer (Aframe bruker grader)
+   Coordinate system (local, world)
+      <a-entity id="foo" position="1 2 3">
+        <a-entity id="bar" position="2 4 1"></a-entity>
+        % the bar is at local ( 2, 4, 1 )
+        % the bar is at world ( 1+2, 2+4, 3+1 )
+      </a-entity>
+   (... mye ikke lest/forstått ...)
+
+Import av modeller: https://aframe.io/docs/1.0.0/introduction/models.html
+   world-wide "ecosystem" of formats
+      glTF
+      OBJ 
+      PLY, FBX, JSON, three.js ...
+   usually a text file following a format, containing
+      vertices, faces, ... textures etc, etc.
+   tegnes i en three.js scene som "meshes"
+   feilkilder: CORS (opphavs-sikring), stinavn (lokal)
+      model vises ikke (zoom)
+      teksturer e.l. vises ikke (absolutt sti), må korrigere sti (gjør den relativ)
+      ser feil ut, ... noe med "normals"?
+      trege, ingenting skjer.   Sjekk med "stats" <a-scene stats>
+         optimalisering:  fjern flaskehalser, gå ned i oppløsning etc
+
+   
+   
+---------------------------------------------------
+A-frame school
+   https://aframe.io/aframe-school/
+   bruker glitch.com/~aframe
+   Prologue: https://aframe.io/aframe-school/#/1
+      docs og FAQ: https://aframe.io/docs/
+      peeps on Slack: https://aframe.io/community/#slack
+      Stack Overflow: http://stackoverflow.com/questions/ask/?tags=aframe
+      Ikke nevnt
+         https://supermedium.com/discord
+         https://aframe.io/blog/
+         https://aframe.io/subscribe/
+         https://aframe.io/slack-invite/
+   Glitch https://aframe.io/aframe-school/#/2
+      skrive kode i nettleseren (sky), 
+         evt i lokalt miljø (ex Atom teksteditor, ex Moongoose webserver)
+         textpad/vi og Apache (del av *AMP)
+         ngrok gir andre enheter tilgang
+      åpne nytt eller andre's prosjekt
+         /public
+         "Remix your own" for remix (omblanding) av prosjekt
+      invitere flere brukere (forfattere/kodere), 
+      lage nye filer 
+      laste opp "assets"
+      forking (forgreining) av prosjekt
+      live publisering (deployment) med egen HTTPS-sikret URL
+      kan linkes til Github (anbefalt)
+      eksportering av prosjekt til .tgz (fex til Github)
+   Eksempler: https://aframe.io/aframe-school/#/3
+      Henviser til 3-4 sider
+         https://aframe.io/
+         https://aframe.io/blog/
+         https://github.com/aframevr/awesome-aframe
+         https://webvr.rocks/
+   Begynn med hello https://aframe.io/aframe-school/#/4
+      Enkle HTML element (hvorfor kalles de "primitiver" her?)
+         Elementets navn i startmerke (fex <a-box>)
+         Attributtets navn (fex position)
+         Tilordning (=)
+         Attributtets verdi (fex "-1 0.5 3"), i hermetegn
+            Akkurat her er dette et 3D-koordinat (x y z) i meter
+         Sluttmerke </a-box>
+         Kalles "primitiver", da de er "syntaktisk sukker" (convenicence)
+            https://aframe.io/docs/1.0.0/introduction/html-and-primitives.html#html
+      Endre grunnleggende "meshes" ved å endre attributtene (?)
+      Få følelse for "workflow" (arbeidsmåte?)
+         lag en remix
+         posisjoner https://aframe.io/docs/master/components/position.html
+            legg en a-ring til scenen (for posisjonering)
+         rotasjon https://aframe.io/docs/master/components/rotation.html
+            legg scene i en div (for rotasjon)
+         primitiver: https://aframe.io/docs/0.5.0/primitives/
+            
+            legg til torus, docahedron og tekst
+   Legg til teksturer https://aframe.io/aframe-school/#/5
+      Bilder i stedet for farger
+         <XXX... src="url"...> ... </XXX>
+         https://aframe.io/docs/0.5.0/guides/building-a-basic-scene.html#applying-an-image-texture
+      Lastes opp til /assets
+      Må serves med CORS over HTTPS
+         CORS:  Cross-Origin Resource Sharing 
+            https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+         HTTPS:  Sikret transport (kryptert, signert), vanligvis port 443
+      Oppgave: Legg tekstur til a-plane, a-box, a-sphere, a-cone, a-sky (360 grader)
+      Ekstra: https://en.wikipedia.org/wiki/VR_photography
+   A-frame inspector: https://aframe.io/aframe-school/#/6
+      Ctrl-Alt-i
+      https://aframe.io/docs/master/introduction/visual-inspector-and-dev-tools.html#using-the-inspector
+   Entity-Component Architecture: https://aframe.io/aframe-school/#/7
+      Oppgaver
+         Gjør a-box om til a-entity med primitiver for
+            geometri: https://aframe.io/docs/0.5.0/components/geometry.html
+            materialer: https://aframe.io/docs/0.5.0/components/material.html
+         Lag en kule som også er lyskilde
+            lys: https://aframe.io/docs/0.5.0/components/light.html
+         Ekstra: Hent inn animasjon fra Registry (ved å bruke script)
+            Registry: https://aframe.io/aframe-registry/
+   Registry: https://aframe.io/aframe-school/#/8
+      Komponenter andre har laget
+      Lenkes inn med <script src="...">
+      Oppgaver
+         Particle, Animation, Outline Effect
+   Javascript: https://aframe.io/aframe-school/#/9
+      development console Ctrl-Shift-J eller høyreklikk+Inspect
+      https://aframe.io/docs/0.5.0/guides/using-javascript-and-dom-apis.html
+      søke/velge entiteter (query selector)
+      endre entiteter (setAttribute)
+      lage nye entiteter (appendChild)
+      reagere på hendelser (event, eventlistener)
+   Gaze-based interaction: https://aframe.io/aframe-school/#/10
+      cursor 
+         mus, pekeplate o.l.
+         følge øynenes fokus ("gaze")
+   Legg til 3D-modeller: https://aframe.io/aframe-school/#/11
+      Modell:  Koordinater, materialer, teksturer, m.m.
+      Lages med fex Blender
+      Lagres i fex glTF (flere mapper og filer)
+         Lastes opp til fex Github og hentes fra rawgit e.l.
+   Handkontroller: https://aframe.io/aframe-school/#/12
+   SLUTT A-frame school.
+
+Visual inspector
+   Nøye gjennomgang!
+   https://aframe.io/docs/master/introduction/visual-inspector-and-dev-tools.html#using-the-inspector
+   DOM vises som tre
+   vise egenskaper til et element
+      posisjon
+      materialer
+      skygge (kaste, ta imot)
+      m.m.
+   legge til, klone og fjerne element
+   synlig? element kan gjemmes/vises
+   kjøre/pause
+   eksport til glTF (JSON, khronos 3D scenes/models, 2016–)
+View source
+   
+Hello WebVR
+   https://aframe.io/examples/showcase/helloworld/
+   Firkant, kule og sylinder.
+  <head>
+   ...
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #FAFAFA">
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+    </a-scene>
+  </body>
+
+HTML
+   antar at dere kjenner enkel HTML fra IBE102.
+   element har 
+      navn 
+      et sett attributt="verdi"
+      startmerke, sluttmerke
+   element inne i et element blir barn
+   trestruktur (Document Object Model, DOM)
+
+

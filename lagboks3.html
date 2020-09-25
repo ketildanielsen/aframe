@@ -1,0 +1,32 @@
+<!-- lab 7/9 deloppg 3: 
+  endre forrige (2) slik at de 7 boksene lages en og en, 
+  med 2 sekunders mellomrom. -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+	var bokslager = setInterval (lagboks, 2000);
+        var antBokser = 0; // må huske hvor mange vi har laget
+	function uniform (a,b) { return a + (b-a)*Math.random(0,1); }
+        function tpos() { return uniform(-5,5); }
+	function lagboks() {
+           var scene = document.querySelector ('a-scene'); 
+           ny = document.createElement ('a-box') 
+           ny.object3D.position.x=tpos();  
+           ny.object3D.position.y=tpos();  
+           ny.object3D.position.z=tpos();  
+           scene.appendChild (ny); 
+           antBokser++; // øk antall bokser
+           if (antBokser >= 7) { // sjekk hvor mange vi har laget
+	     clearInterval (bokslager);
+           }
+        }
+     </script>
+  </head>
+  
+  <!-- tom scene, innhold lages i Javascript -->
+  <body>
+    <a-scene>
+    </a-scene>
+  </body>
+</html>

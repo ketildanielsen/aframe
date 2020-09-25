@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<script>
+  AFRAME.registerComponent('scale-on-mouseenter', {
+    schema: {
+      to: {default: '2.5 2.5 2.5', type: 'vec3'}
+    },
+
+    init: function () {
+      var data = this.data;
+      var el = this.el;
+      this.el.addEventListener('mouseenter', function () {
+        el.object3D.scale.copy(data.to);
+      });
+    }
+  });
+</script>
+</head>
+
+  <body>
+
+
+<a-scene>
+
+  <a-box color="yellow" position="0 2 -5" rotation="0 45 45" scale="2 2 2" scale-on-mouseenter>
+  </a-box>
+
+  <a-plane src="https://cdn.aframe.io/a-painter/images/floor.jpg" rotation="-90 0 0" width="30" height="30" repeat="10 10"></a-plane>
+
+    <a-camera>
+    <a-cursor></a-cursor>
+  </a-camera>
+
+</a-scene>
+
+  </body>
+</html>

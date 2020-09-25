@@ -1,0 +1,33 @@
+<!-- lab 7/9 deloppg 2: 
+  etter 500 ms skal det
+  lages 7 bokser som står tilfeldig plassert i et 10x10x10 meter rom 
+  som er sentrert i origo (0,0,0). Det betyr at en langs x-aksen kan 
+   stå hvorsom helst mellom -5 og 5.  Det samme for x- og z-aksen.  
+   Bruk gjerne den ovenfor nevnte tpos() for å lage verdi. -->
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script>
+	var bokslager = setInterval (lagboks, 500);
+	function uniform (a,b) { return a + (b-a)*Math.random(0,1); }
+        function tpos() { return uniform(-5,5); }
+	function lagboks() {
+           var scene = document.querySelector ('a-scene'); 
+           for (var i=0; i<7; i++) {
+             ny = document.createElement ('a-box') 
+             ny.object3D.position.x=tpos();  
+             ny.object3D.position.y=tpos();  
+             ny.object3D.position.z=tpos();  
+             scene.appendChild (ny); 
+   	   }
+	 clearInterval (bokslager);
+       }
+     </script>
+  </head>
+  
+  <!-- tom scene, innhold lages i Javascript -->
+  <body>
+    <a-scene>
+    </a-scene>
+  </body>
+</html>

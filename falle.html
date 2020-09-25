@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <script>
+    function uniform (a,b) { return b+Math.random(0,1)*(b-a); }
+    var bokselager = setInterval (lagboks, uniform(0.1,2)*1000);
+    function lagboks() {
+      var ny=document.createElement ('a-box');
+      ny.object3D.position.y=2;
+      ny.object3D.position.z=-6;
+//      ny.object3D.material.color.set("blue");
+// https://aframe.io/docs/1.0.0/introduction/javascript-events-dom-apis.html
+ny.setAttribute('dynamic-body', {
+  shape: 'box',
+  mass: 1.5,
+  linearDamping: 0.005
+});
+      document.getElementById ('fallescene').appendChild(ny);
+//      clearInterval (bokselager);
+    }
+  </script>
+  <body>
+    <a-scene id="fallescene" physics>
+      <a-camera position="0 1.6 4"> </a-camera>
+      <a-box position="0 2 -6" rotation="0 0 0" color="red" dynamic-body></a-box>
+      <a-plane position="0 -6 -6" rotation="-80 0 0" width="3" color="yellow" static-body></a-plane>
+      <a-sky color="grey"> </a-sky>
+    </a-scene>
+  </body>
+</html>

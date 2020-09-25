@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"> </script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script>
+    // var flytter = setInterval (flytt, 500);
+    var nybillager = setInterval (lagnybil, 500);
+    function uniform(a,b) { // tilfeldig tall mellom a og b, a < b
+      return a+Math.random()*(b-a);
+    } 
+ 
+    function lagnybil() {
+      scene = document.querySelector ('a-scene'); // søk opp stedet
+      bil = document.createElement ('a-box') // lag nytt
+      bil.object3D.position.x=uniform(-10,10)
+      bil.object3D.position.y=0;
+      bil.object3D.position.z=uniform(-10,10)
+      scene.appendChild (bil); // legge inn (obs: asynkron)
+    }
+    function flytt() {
+      t = document.getElementById("bil1");    
+      t.object3D.position.z += 0.3;
+      t = document.getElementById("bil2");    
+      t.object3D.position.z += 0.2;
+    }
+    function stopp() {
+      clearInterval(flytter);
+    }
+    </script>
+  </head>
+  <body>
+    <a-scene physics="debug: true">
+
+      <a-box id="bil1" dynamic-body color="blue" position="0 1 -10">
+      </a-box>
+
+      <a-box id="bil2" dynamic-body color="yellow" position="0 1 -5">
+      </a-box>
+
+      <a-camera>
+         <a-entity id="hud" text="value: Hello World;"></a-entity>
+      </a-camera>
+
+    </a-scene>
+  </body>
+</html>
