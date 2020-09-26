@@ -79,7 +79,8 @@ If on an original Oculus Rift, the following will add two hand controls:
 The component is [laser-controls](https://aframe.io/docs/1.0.0/components/laser-controls.html) and will
 work with many controls they say, not just the Oculus ones.
 
-To control which entities can be hit by the laser, add an objects attribute.
+To control which entities can be hit by the laser, add a raycaster attribute and set objects to the
+CSS selectors (name, class).
 ```html
            <a-entity laser-controls="hand: left" raycaster="objects: redbox"></a-entity>
            ...
