@@ -34,7 +34,8 @@ A gaze usually follows the camera (the viewpoint of the user).  This will add a 
       <cursor> </cursor>
    </camera>
 ```
-It is like casting a ray on an entity.  The gaze is a pointer, and the entity
+The cursor is built on a raycaster component, and indeed: It is like casting a ray on an entity.  
+The gaze is a pointer, and the entity
 can react on mouseenter, mouseleave events.
 ```html
         <a-box color="red" onmouseenter="alert('hit');" >  </a-box>
