@@ -21,10 +21,20 @@ Meaningful function names also  increases readability.
 A function can be called from the Javascript program.  Or, it can be called in the HTML code when
 something has happened.  
 ```html
-   <a-scene onload="console.log('Scene completed loading');" >
+XXX NOT TRUE
+   <a-scene onload="console.log('Scene completed loading');" >  
+   <a-scene onload="function() { console.log('Scene completed loading'); }" >
 ```
-Note: console.log("..") is a built-in function that prints out text (see below).
-There are thousands of built-in functions.
+The first will not be allowed, errors in console (F12).
+   
+Note: consolefunction() { .log("..") is a built-i }n function that prints out text (see below).
+There are thousands of built-in fun
+
+The first will not be allowed, errors in console (F12).
+   
+## security
+
+The browser may deny to run a program. One is due to [script-src in Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src).
 
 ## Text messages
 
