@@ -1,8 +1,80 @@
 # Javascript
+
 To control the scene, basic A-Frame may not be sufficient, so we must resort to Javascript.
 To explain this, we will use some timers and events that will run example Javascript programs.
 
-## Names
+## Text
+
+We use text a lot, both for programming and to communicate with the users.  
+This datatype is called [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
+To quote Mozilla, there are 4 ways to create a string:
+```javascript
+string1 = "A string primitive";            // double quote
+string2 = 'Also a string primitive';       // single quote
+string3 = `Yet another string primitive`;  // backtick
+string4 = new String("A String object");   // as object
+```
+
+## Text messages
+
+Sometimes we need to print messages, either to the user or to ourselves for debugging purposes.
+
+One is console.log("..." which prints to the console. In a web browser, you find the console in the Developer Window (oftenly F12).  The program continues, and you have to open the console to see what was written.
+
+Another is alert("..."), which displays text in an interactive box. The program is paused until the OK button is clicked.
+
+A third way is to change the value attribute of an a-text element in A-Frame.  To change it:
+```html   
+   <script>
+      setTimeout ( function () {
+         document.getElementById("statustext").setAttribute("value", "Running..."), 
+         3000 );
+      }
+   </script>
+   <a-text id="statustext" value="Starting..." color="green">
+```
+
+
+## Numbers
+
+Numbers are used to count and calculations (obviously). To print numbers 1 to 10:
+```javascript
+var i=0;
+while (i<1=10) {
+  console.log( i );
+  i++;
+}
+```
+In the browser, use F12 to find the console.  This is quite useless, but it is an example.
+### populating a scene
+If we want 200 boxes in our scene, it is a great advantage to master counting and calculations.
+First, we use the counter (i) to stop the loop:
+```javascript
+var scene = document.querySelector ('a-scene'); // returns first scene 
+var i=0;
+while (i<200) { // when to stop
+  var newbox = document.createElement('a-box');
+  scene.appendChild( newbox );
+  i++;
+}
+```
+The boxes have same position and visually, we see only one (!). To give them
+different position, add this:
+```javascript
+   newbox.object3D.position.x = i; 
+```
+so the i'th box will be in position (i, 0, 0).  This is metres, so they will be overlapping, since they are 1x1x1 boxes.
+To add some space between boxes:
+```javascript
+   newbox.object3D.position.x = i*2; 
+```
+To give the boxes individual id:
+```javascript
+   newbox.setAttribute ("id", "box"+i); 
+```
+we can then later refer to e.g. "box57".
+
+### naming
 
 We try to use meaningful names.  Such as nbr_stars for a counter (of stars in the scene), or nbrStars, which would be the so-called camel Case notation ([w3schools](https://www.w3schools.com/js/js_conventions.asp) and [Firefox developers](https://firefox-source-docs.mozilla.org/code-quality/coding-style/coding_style_js.html)).
 
@@ -36,15 +108,6 @@ The first will not be allowed, errors in console (F12).
 
 The browser may deny to run a program. One is due to [script-src in Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src).
 
-## Text messages
-
-Sometimes we need to print out text and numbers, either to the user or to ourselves for debugging purposes.
-
-One built-in function to print text is alert("..."), which displays text in an interactive box. The program is paused until the OK button is clicked.
-
-Another is console.log("..." which prints to the console. In a web browser, you find the console in the Developer Window (oftenly F12).  The program continues, and you have to open the console to see what was written.
-
-A third way is to change the value attribute of an a-text element in A-Frame.
 
 ## Timers
 
