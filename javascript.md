@@ -1,25 +1,46 @@
 # Javascript
 
-To control the scene, basic A-Frame may not be sufficient, so we must resort to Javascript.
+To create and manage the scene, basic A-Frame may not be sufficient, so we must resort to Javascript.
+
 To explain this, we will use some timers and events that will run example Javascript programs.
 
 ## Text
 
 We use text a lot, both for programming and to communicate with the users.  
-This datatype is called [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
-To quote Mozilla, there are 4 ways to create a string:
+This datatype is called [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) because it is a string of characters. ([more from w3schools](https://www.w3schools.com/js/js_strings.asp)).
+
+4 ways:
 ```javascript
-string1 = "A string primitive";            // double quote
-string2 = 'Also a string primitive';       // single quote
-string3 = `Yet another string primitive`;  // backtick
-string4 = new String("A String object");   // as object
+"A string primitive"             // double quote
+ 'Also a string primitive'       // single quote
+`Yet another string primitive`  // backtick
+new String("A String object")   // as object
 ```
 
-## Text messages
+Now, open the developer window (F12 in Chrome and Firefox) and the console pane.  You see a prompt, where you can write input Javascript.
+
+Input "hi" (check response)
+Input 'hi' (same response) 
+
+input "hi (error message)
+input hi" (same)
+input "hi"" (unexpected string)
+   
+input "me" + "you"  (they are joined).  
+Q:  Find 2 ways to add the space.
+Q:  Make it output "you me"
+
+input "hi" - "h" (NaN, not a number; it thinks you are doing numerics).
+
+input alert("hi"), just a different presentation.
+
+
+
+### console
 
 Sometimes we need to print messages, either to the user or to ourselves for debugging purposes.
 
-One is console.log("..." which prints to the console. In a web browser, you find the console in the Developer Window (oftenly F12).  The program continues, and you have to open the console to see what was written.
+One is console.log("...") which prints to the console. In a web browser, you find the console in the Developer Window (oftenly F12).  The program continues, and you have to open the console to see what was written.
 
 Another is alert("..."), which displays text in an interactive box. The program is paused until the OK button is clicked.
 
