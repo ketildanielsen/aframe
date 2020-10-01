@@ -3,6 +3,8 @@ A link in web is an address (URL).
 To follow a link, the user has to do something.  Click on it (in a web browser) or
 look intensely at it (with some fancy glasses).
 
+A-Frame got links in v0.6.0 according to [this blog post](https://aframe.io/blog/aframe-v0.6.0/] of 29 June 2017.
+
 This was written on October 1, 2020.  Seems to work at the time of writing.
 
 ## Simplest?
@@ -56,7 +58,7 @@ the linking mechanism works, but The Title and the image does not appear:
                    on:mouseenter;">
       </a-box>
 ```
-### A-Frame's a-link primitive
+## A-Frame's a-link primitive
 Again, an example straight from A-Frame:
 ```html
 <a-link href="index.html" title="My Homepage" image="#homeThumbnail"></a-link>
@@ -64,4 +66,10 @@ Again, an example straight from A-Frame:
 and, adapted to my situation:
 ```html
 
+```
+
+## The link-controls components
+Supposedly a "better" experiense. Not tryed.
+```html
+<script src="https://raw.githubusercontent.com/aframevr/aframe/master/examples/showcase/link-traversal/js/components/link-controls.js"></script>
 ```
