@@ -1,23 +1,23 @@
 # Javascript
 
-To create and manage the scene, basic A-Frame may not be sufficient, so we must resort to Javascript.
-
-To explain this, we will use some timers and events that will run example Javascript programs.
+To create and manage the scene, basic A-Frame may not be sufficient, so we must/may resort to Javascript.
 
 ## Text
 
-We use text a lot, both for programming and to communicate with the users.  
-This datatype is called [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) because it is a string of characters. ([more from w3schools](https://www.w3schools.com/js/js_strings.asp)).
+The usual start is to say Hello!  Do so by typing console.log("Hello!") in the console (F12, choose console).
 
-4 ways:
+The five letters and the exclamation mark are characters, put together in an ordered string of characters called
+[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) 
+([w3schools](https://www.w3schools.com/js/js_strings.asp)).
+
+You will see 4 ways to set up strings:
 ```javascript
-"A string primitive"             // double quote
- 'Also a string primitive'       // single quote
+"A string primitive"            // double quote
+ 'Also a string primitive'      // single quote
 `Yet another string primitive`  // backtick
 new String("A String object")   // as object
 ```
-
-Now, open the developer window (F12 in Chrome and Firefox) and the console pane.  You see a prompt, where you can write input Javascript.
+Will be explained later.
 
 Input "hi" (check response)
 Input 'hi' (same response) 
@@ -36,15 +36,23 @@ input alert("hi"), just a different presentation.
 
 
 
-### console
+### other ways to text
 
-Sometimes we need to print messages, either to the user or to ourselves for debugging purposes.
+Besides console.log(), you may do window.alert("..."), which displays it in an interactive box. The program is paused until the OK button is clicked.
 
-One is console.log("...") which prints to the console. In a web browser, you find the console in the Developer Window (oftenly F12).  The program continues, and you have to open the console to see what was written.
+A third way is to put it in the window itself.
+```
+   window.write("...");
+```
+(which will erase everything that was there...).
 
-Another is alert("..."), which displays text in an interactive box. The program is paused until the OK button is clicked.
+You can replace parts of the window contents by
+```javascript
+   el.innerHTML = "...";  // el is an element
+```
 
-A third way is to change the value attribute of an a-text element in A-Frame.  To change it:
+Text in VR is maybe not so important.  You could
+change the value attribute of an a-text element in A-Frame:
 ```html   
    <script>
       setTimeout ( function () {
